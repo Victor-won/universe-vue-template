@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
               isWebc
                 ? `my-button-webc.${format}.js`
                 : `universe-vue-template.${format}.js`,
-            formats: ['es', 'cjs'],
+            formats: ['es', 'cjs', 'umd'],
           },
           rollupOptions: {
             external: ['vue', 'vue-demi'],
@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
               },
             },
           },
-          outDir: isWebc ? 'dist/webc' : 'dist',
+          outDir: isWebc ? '../dist/webc' : 'dist',
           emptyOutDir: true,
         }
       : undefined,

@@ -4,6 +4,13 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue2()],
+  resolve: {
+    alias: {
+      'vue': path.resolve(__dirname, 'node_modules/vue'),
+      'vue-demi': path.resolve(__dirname, 'node_modules/vue-demi'),
+      '@vue/composition-api': path.resolve(__dirname, 'node_modules/@vue/composition-api'),
+    }
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, '../components/index.ts'),
