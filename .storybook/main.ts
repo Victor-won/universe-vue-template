@@ -9,7 +9,8 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@storybook/addon-vitest"
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions"
   ],
   "framework": {
     "name": "@storybook/vue3-vite",

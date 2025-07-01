@@ -1,0 +1,22 @@
+{
+  "name": "universe-vue-template",
+  "title": "Universe Vue 通用组件库",
+  "description": "支持 Vue2/Vue3 的通用组件库，支持主题、文档、测试、WebComponent、API 自动化等。",
+  "homepage": "https://github.com/<your-org>/universe-vue-template",
+  "repository": "https://github.com/<your-org>/universe-vue-template",
+  "npm": "universe-vue-template",
+  "version": "1.0.0",
+  "components": [
+    {
+      "name": "MyButton",
+      "title": "按钮",
+      "category": "通用",
+      "path": "components/MyButton",
+      "doc": "components/MyButton/README.md",
+      "api": "docs/api/MyButton.json",
+      "preview": "https://universe-vue-template-storybook-url/?path=/story/通用组件-mybutton--默认"
+    }
+  ],
+  "theme": "components/theme/default-theme.css",
+  "webComponent": "dist/webc/my-button-webc.es.js"
+}

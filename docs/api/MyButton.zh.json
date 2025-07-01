@@ -1,0 +1,41 @@
+{
+  "exportName": "default",
+  "displayName": "MyButton",
+  "description": "",
+  "tags": {},
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "name": "String as () => 'button' | 'submit' | 'reset'"
+      },
+      "defaultValue": {
+        "func": false,
+        "value": "'button'"
+      }
+    },
+    {
+      "name": "disabled",
+      "type": {
+        "name": "boolean"
+      },
+      "defaultValue": {
+        "func": false,
+        "value": "false"
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "click"
+    }
+  ],
+  "slots": [
+    {
+      "name": "default"
+    }
+  ],
+  "sourceFiles": [
+    "/Users/angck/open-source/universe-vue-template/components/MyButton/MyButton.vue"
+  ]
+}

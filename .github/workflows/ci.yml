@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: 安装依赖
+        run: pnpm install
+      - name: 代码格式检查
+        run: pnpm prettier --check .
+      - name: 代码规范检查
+        run: pnpm eslint .
+      - name: 类型检查
+        run: pnpm build:types
+      - name: 单元测试与覆盖率
+        run: pnpm test
+      - name: 生成覆盖率报告
+        run: pnpm test -- --coverage
+      - name: 上传覆盖率到 Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+      - name: 组件库打包
+        run: pnpm build:vue3
+      - name: WebComponent 打包
+        run: pnpm build:webc

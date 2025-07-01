@@ -1,0 +1,30 @@
+{
+  "default": {
+    "--uvt-primary-color": "#409eff",
+    "--uvt-primary-color-hover": "#66b1ff",
+    "--uvt-disabled-color": "#dcdfe6",
+    "--uvt-radius": "4px",
+    "--uvt-font-size": "14px",
+    "--uvt-bg-color": "#fff",
+    "--uvt-text-color": "#222"
+  },
+  "dark": {
+    "--uvt-primary-color": "#409eff",
+    "--uvt-primary-color-hover": "#66b1ff",
+    "--uvt-disabled-color": "#444",
+    "--uvt-radius": "4px",
+    "--uvt-font-size": "14px",
+    "--uvt-bg-color": "#181818",
+    "--uvt-text-color": "#eee"
+  },
+  "brandA": {
+    "--uvt-primary-color": "#e91e63",
+    "--uvt-primary-color-hover": "#ff6090",
+    "--uvt-disabled-color": "#c0c4cc",
+    "--uvt-radius": "8px",
+    "--uvt-font-size": "16px",
+    "--uvt-bg-color": "#fff",
+    "--uvt-text-color": "#222"
+  },
+  "custom": {}
+}

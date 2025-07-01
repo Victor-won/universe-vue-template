@@ -31,15 +31,19 @@ function onClick(event: MouseEvent) {
 button {
   padding: 8px 16px;
   border: none;
-  border-radius: 4px;
-  background: #409eff;
+  border-radius: var(--uvt-radius);
+  background: var(--uvt-primary-color);
   color: #fff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--uvt-font-size);
+  font-family: var(--uvt-font-family);
   transition: background 0.2s;
 }
 button:disabled {
-  background: #dcdfe6;
+  background: var(--uvt-disabled-color);
   cursor: not-allowed;
+}
+button:not(:disabled):hover {
+  background: var(--uvt-primary-color-hover);
 }
 </style>

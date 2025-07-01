@@ -4,7 +4,9 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   const isLib = mode === 'lib';
+  const isWebc = !!process.env.BUILD_WEB_COMPONENT;
   return {
+    root: './playground',
     plugins: [vue()],
     resolve: {
       alias: {
@@ -15,12 +17,17 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5173,
     },
-    build: isLib
+    build: isLib || isWebc
       ? {
           lib: {
-            entry: path.resolve(__dirname, 'components/index.ts'),
-            name: 'UniverseVueTemplate',
-            fileName: (format) => `universe-vue-template.${format}.js`,
+            entry: isWebc
+              ? path.resolve(__dirname, 'components/MyButton/MyButton.ce.ts')
+              : path.resolve(__dirname, 'components/index.ts'),
+            name: isWebc ? 'MyButtonElement' : 'UniverseVueTemplate',
+            fileName: (format) =>
+              isWebc
+                ? `my-button-webc.${format}.js`
+                : `universe-vue-template.${format}.js`,
             formats: ['es', 'cjs'],
           },
           rollupOptions: {
@@ -32,7 +39,7 @@ export default defineConfig(({ mode }) => {
               },
             },
           },
-          outDir: 'dist',
+          outDir: isWebc ? 'dist/webc' : 'dist',
           emptyOutDir: true,
         }
       : undefined,
