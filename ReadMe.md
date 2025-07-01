@@ -1,163 +1,204 @@
-下面是一个针对你需求的 Vue 通用化组件库项目 的详细产品文档，包含功能说明、技术架构、组件开发规范、本地调试、测试、文档管理等内容，适用于团队协作与后续维护。
+# universe-vue-template 开发使用文档
 
-⸻
+## 目录
 
-🎯 Vue 通用化组件库产品文档（支持 Vue2 & Vue3）
+1. [项目简介](#项目简介)
+2. [环境准备](#环境准备)
+3. [项目结构说明](#项目结构说明)
+4. [依赖安装](#依赖安装)
+5. [开发流程](#开发流程)
+    - [新建组件](#新建组件)
+    - [组件开发规范](#组件开发规范)
+    - [组件文档与国际化](#组件文档与国际化)
+    - [单元测试](#单元测试)
+    - [Storybook 预览与文档](#storybook-预览与文档)
+6. [主题系统与主题编辑器](#主题系统与主题编辑器)
+7. [打包与类型声明](#打包与类型声明)
+8. [自动化与 CI/CD](#自动化与-cicd)
+9. [物料平台/低代码平台对接](#物料平台低代码平台对接)
+10. [官网与多语言首页](#官网与多语言首页)
+11. [常见问题与扩展](#常见问题与扩展)
 
-一、项目目标
+---
 
-构建一个支持同时用于 Vue2 和 Vue3 项目的通用组件库，采用 TypeScript 编写，支持本地开发调试、组件文档展示（使用 Storybook）、并自动生成组件修改记录文档。组件库应具备良好的可维护性、可扩展性及团队协作开发能力。
+## 项目简介
 
-⸻
+universe-vue-template 是一个现代化的 Vue 通用组件库工程模板，集成了组件开发、主题系统、国际化、自动化测试、文档、官网、物料平台对接等主流能力，支持一键体验和扩展，适合企业级和个人项目快速搭建。
 
-二、功能模块
+---
 
-1. 通用组件开发支持
-   • 使用 TypeScript 编写组件。
-   • 使用 vue-demi 实现 Vue2 / Vue3 兼容。
-   • 组件支持按需引入（Tree-shaking）。
-   • 兼容多种打包方式（ESM / CJS / UMD）。
+## 环境准备
 
-2. 本地调试与开发体验
-   • 提供本地组件 playground 页面（Vite 构建）。
-   • 使用 Storybook 展示每个组件使用方式、状态、交互。
-   • 热更新，支持快速预览。
+- Node.js ≥ 16
+- pnpm ≥ 8（推荐，支持 monorepo 和更快的依赖管理）
+- Git
+- 推荐编辑器：VSCode + Volar 插件
 
-3. 版本兼容与构建管理
-   • 使用 unbuild 实现通用构建流程，生成多种模块格式。
-   • 可通过环境变量控制编译为 Vue2 或 Vue3 版本。
-   • 支持同时输出完整包和按需组件包。
+---
 
-4. 测试系统
-   • 使用 Vitest 进行单元测试。
-   • 使用 @vue/test-utils 支持 Vue 组件测试。
-   • 与 CI 集成，保证组件稳定性。
+## 项目结构说明
 
-5. 文档系统
-   • 使用 Storybook 自动生成组件文档。
-   • 每个组件配有 README 或 MDX 文档，自动收录至主文档页。
-   • 自动生成 CHANGELOG（使用 Conventional Commits + changelog 工具）。
+```
+universe-vue-template/
+├── components/           # 组件源码目录
+│   └── MyButton/         # 示例组件
+│       ├── MyButton.vue
+│       ├── index.ts
+│       ├── README.md / README.en.md
+│       ├── MyButton.test.ts
+│       ├── MyButton.stories.ts
+│       └── ...
+├── docs/                 # API 文档（多语言）
+├── material/             # 物料平台对接元数据
+├── playground/           # 本地调试/预览项目
+├── scripts/              # 自动化脚本
+├── stories/              # Storybook 配置与首页
+├── test/                 # 测试相关
+├── dist/                 # 构建输出
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── vitest.config.ts
+└── ...
+```
 
-⸻
+---
 
-三、技术架构
+## 依赖安装
 
-模块 技术栈
-组件框架 Vue2 + Vue3 (vue-demi)
-打包工具 unbuild
-类型系统 TypeScript
-文档工具 Storybook + Markdown
-测试工具 Vitest + @vue/test-utils
-变更记录 conventional-changelog / changelogen
-调试工具 Vite
-模块兼容 ESM / CJS / dts 类型文件
-
-⸻
-
-四、组件开发规范
-
-1. 目录结构
-
-components/
-└─ Button/
-├─ index.ts
-├─ Button.vue
-├─ Button.test.ts
-├─ Button.stories.ts
-├─ README.md
-
-2. 命名规范
-   • 组件名使用 PascalCase，如：MyButton
-   • 文件名使用 kebab-case，如：my-button.vue
-
-3. 代码风格
-   • 遵循 ESLint + Prettier 规范
-   • 类型声明完整，使用 defineComponent 包裹
-   • props、emits 使用 withDefaults, defineProps, defineEmits 等辅助类型
-
-⸻
-
-五、开发与调试流程
-
-本地开发
-
-# 安装依赖
-
+```bash
 pnpm install
+```
 
-# 启动本地 Storybook 组件调试环境
+---
 
-pnpm storybook
+## 开发流程
 
-# 启动本地 playground（Vite 项目）
+### 新建组件
 
-pnpm dev
+1. 在 `components/` 下新建目录，如 `MyInput/`。
+2. 创建核心文件：
+   - `MyInput.vue`：组件实现
+   - `index.ts`：导出组件
+   - `README.md` / `README.en.md`：中英文文档
+   - `MyInput.test.ts`：单元测试
+   - `MyInput.stories.ts`：Storybook 示例
 
-添加新组件
+3. 在 `components/index.ts` 注册新组件，便于统一导出。
 
-pnpm create-component MyComponent
+### 组件开发规范
 
-通过脚本生成组件目录、模板、测试文件和文档文件。
+- 组件名统一使用大驼峰（如 `MyButton`）。
+- Props、事件、插槽需有类型声明和注释。
+- 样式全部使用 CSS 变量，便于主题切换。
+- 支持 `type`、`disabled`、`size` 等常用属性。
+- 事件需以 `emit` 方式抛出，文档需说明。
 
-⸻
+### 组件文档与国际化
 
-六、构建与发布
+- 每个组件需有 `README.md`（中文）和 `README.en.md`（英文）。
+- API 文档自动生成到 `docs/api/`，支持 `.zh.json`/`.en.json`。
+- Storybook 工具栏支持语言切换，文档和示例自动切换。
 
-构建组件库
+### 单元测试
 
-# 构建为 Vue3 版本
+- 使用 Vitest + @vue/test-utils。
+- 每个组件需有对应的 `xxx.test.ts`，覆盖 props、事件、交互等。
+- 运行测试：
 
-pnpm build:vue3
+  ```bash
+  pnpm test
+  ```
 
-# 构建为 Vue2 版本
+- 查看覆盖率：
 
-pnpm build:vue2
+  ```bash
+  pnpm coverage
+  ```
 
-发布流程（可选 CI/CD）
+### Storybook 预览与文档
 
-pnpm changelog # 自动生成 CHANGELOG.md
-pnpm version patch # 使用 pnpm + Git 版本号更新
-pnpm publish # 发布至 npm
+- 运行 Storybook 本地预览：
 
-⸻
+  ```bash
+  pnpm storybook
+  ```
 
-七、测试与质量保障
-• 所有组件应具备 Vitest 单元测试
-• 测试覆盖率 > 90%
-• CI 检查包括 Lint、Test、Build
+- 新增/修改组件后，需补充/更新对应的 `.stories.ts` 文件，支持多状态、多语言、主题切换。
 
-⸻
+---
 
-八、文档管理规范
+## 主题系统与主题编辑器
 
-组件文档
-• 每个组件需书写 README.md 或 .stories.ts 文件，包含：
-• props 表
-• 示例代码
-• 使用说明
-• 注意事项
+- 所有主题变量（如主色、圆角、字体等）均为 CSS 变量，集中管理于 `components/theme/`。
+- Storybook 工具栏支持主题切换、暗黑模式。
+- 首页内置主题编辑器，支持实时编辑、导入导出、localStorage 持久化。
+- 主题切换、暗黑模式、语言切换三者互不影响，状态持久化。
 
-项目总览文档
-• docs/overview.md 记录组件列表
-• CHANGELOG.md 自动生成，每次提交遵循 Conventional Commit 风格，如：
+---
 
-feat(button): 新增加载状态属性
-fix(input): 修复聚焦闪烁问题
+## 打包与类型声明
 
-⸻
+- 使用 Vite library mode 打包，支持 ESM/CJS/UMD/types。
+- 运行打包：
 
-九、扩展功能
+  ```bash
+  pnpm build
+  ```
 
-• 支持自动生成 API 文档（vue-docgen）
-• 支持导出为 WebComponent
-• 支持远程物料平台注册（低代码平台集成）
-• 增加主题系统（可定制样式）
+- 类型声明输出到 `dist/types`，支持 TypeScript 用户。
+- 支持 WebComponent 导出（如 `<uvt-button>`），可在任意前端框架/HTML 中直接使用。
 
-⸻
+---
 
-十、工程化
+## 自动化与 CI/CD
 
-1.  🏗️ 项目脚手架初始化模板（支持 Vue2 / Vue3 切换）
-2.  🧩 一个示例组件（如 MyButton）的完整开发示例
-3.  🧪 单元测试样例和 CI 配置模板
-4.  📘 README.md 和 CHANGELOG.md 自动生成脚本
+- 集成 Vitest 单元测试与覆盖率。
+- GitHub Actions 自动化流程：
+  - Lint 检查
+  - 单元测试
+  - 构建与类型检查
+  - 覆盖率上传（Codecov）
+  - 自动发布 npm（打 tag）
+  - 自动生成 changelog
+  - Storybook 自动部署到 GitHub Pages
+
+---
+
+## 物料平台/低代码平台对接
+
+- `material/material.json` 自动收集组件元信息、API、文档、预览、主题、WebComponent 入口。
+- 支持主流物料平台一键注册。
+- 详见 `material/README.md`。
+
+---
+
+## 官网与多语言首页
+
+- Storybook 首页美化，包含品牌 Logo、简介、快速入口、导航、特性列表。
+- 首页 story 支持多语言，自动根据工具栏语言切换内容。
+- 官网自动部署，访问 GitHub Pages 即可体验。
+
+---
+
+## 常见问题与扩展
+
+- **如何添加新主题变量？**
+  在 `components/theme/default-theme.css` 中新增变量，并在主题编辑器中注册即可。
+
+- **如何支持更多语言？**
+  在 `README.xx.md`、`docs/api/xxx.xx.json` 中补充对应语言文档，Storybook 工具栏会自动识别。
+
+- **如何对接自定义物料平台？**
+  按照 `material/material.json` 结构补充元信息，参考 `material/README.md`。
+
+- **如何扩展自动化脚本？**
+  在 `scripts/` 目录下新增脚本，并在 `package.json` 中注册命令。
+
+---
+
+## 结语
+
+本项目已集成现代 Vue 组件库开发的全链路能力，适合新手和团队快速上手。建议先阅读各目录下的 README，结合 Storybook 官网体验，逐步实践组件开发、主题扩展、国际化、自动化等能力。
+
+如有问题，欢迎提 Issue 或参与贡献！
