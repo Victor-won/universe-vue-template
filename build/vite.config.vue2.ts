@@ -8,7 +8,7 @@ export default defineConfig({
       entry: 'components/index.ts',
       name: 'UniverseVueTemplate',
       fileName: 'universe-vue-template',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs', 'umd'],
     },
     outDir: 'dist/vue2',
   },

@@ -16,7 +16,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, '../components/index.ts'),
       name: 'UniverseVueTemplate',
       fileName: 'universe-vue-template',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs', 'umd'],
     },
     outDir: path.resolve(__dirname, '../dist/vue2'),
   },
