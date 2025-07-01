@@ -1,0 +1,13 @@
+{
+  "name": "universe-vue-template-vue2-build",
+  "private": true,
+  "devDependencies": {
+    "vite": "^4.4.9",
+    "@vitejs/plugin-vue2": "^2.3.3",
+    "vue-template-compiler": "^2.7.0",
+    "vue": "^2.7.0",
+    "@vue/composition-api": "^1.7.0",
+    "vue-demi": "^0.14.6",
+    "typescript": "^5.0.0"
+  }
+}
