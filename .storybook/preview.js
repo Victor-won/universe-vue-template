@@ -76,7 +76,10 @@ const themes = {
         const parsed = JSON.parse(saved);
         return parsed.vars || {};
       }
-    } catch {}
+    } catch {
+      throw new Error('Failed to parse saved theme');
+    }
+
     return {
       '--uvt-primary-color': '#e67e22',
       '--uvt-primary-color-hover': '#f39c12',
@@ -105,7 +108,9 @@ export const decorators = [
     if (theme === 'custom') {
       try {
         localStorage.setItem('uvt-theme', JSON.stringify({ name: '自定义', vars }));
-      } catch {}
+      } catch {
+        throw new Error('Failed to save theme');
+      }
     }
     if (vars) {
       Object.entries(vars).forEach(([key, value]) => {

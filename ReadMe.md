@@ -1,4 +1,6 @@
-# universe-vue-template 开发使用文档
+# 通用 Vue 组件项目
+
+本项目是一个适合开发支持 Vue2 和 Vue3 通用组件库的项目模板。
 
 ## 目录
 
@@ -12,6 +14,7 @@
     - [组件文档与国际化](#组件文档与国际化)
     - [单元测试](#单元测试)
     - [Storybook 预览与文档](#storybook-预览与文档)
+    - [按需引入与完整包](#按需引入与完整包)
 6. [主题系统与主题编辑器](#主题系统与主题编辑器)
 7. [打包与类型声明](#打包与类型声明)
 8. [自动化与 CI/CD](#自动化与-cicd)
@@ -125,6 +128,27 @@ pnpm install
   ```
 
 - 新增/修改组件后，需补充/更新对应的 `.stories.ts` 文件，支持多状态、多语言、主题切换。
+
+### 按需引入与完整包
+
+- 支持 Tree-shaking，用户可按需引入组件，减小打包体积。
+- 同时输出完整包和单组件包，满足不同使用场景。
+
+**全量引入：**
+
+```ts
+import * as UVT from 'universe-vue-template'
+app.use(UVT)
+```
+
+**按需引入：**
+
+```ts
+import { MyButton } from 'universe-vue-template'
+app.component('MyButton', MyButton)
+// 或
+import MyButton from 'universe-vue-template/components/MyButton'
+```
 
 ---
 

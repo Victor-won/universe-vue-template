@@ -43,6 +43,9 @@
 import MyButton from './Button.vue';
 import './header.css';
 
+// 增加组件名称，符合多词规范
+defineOptions({ name: 'StoryHeader' });
+
 defineProps<{ user: { name: string } | null }>();
 
 defineEmits<{

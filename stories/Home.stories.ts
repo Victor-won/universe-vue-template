@@ -105,7 +105,7 @@ export const Home = (args, { globals }) => {
     data() {
       const themes = JSON.parse(JSON.stringify(defaultThemes));
       // 读取 localStorage
-      let savedTheme = localStorage.getItem('uvt-theme');
+      const savedTheme = localStorage.getItem('uvt-theme');
       let theme = {};
       let currentTheme = 'default';
       if (savedTheme) {
@@ -116,7 +116,9 @@ export const Home = (args, { globals }) => {
             theme = { ...parsed.vars };
             currentTheme = 'custom';
           }
-        } catch {}
+        } catch {
+          throw new Error('Failed to parse saved theme');
+        }
       } else if (darkMode) {
         theme = { ...themes.dark.vars };
         currentTheme = 'dark';

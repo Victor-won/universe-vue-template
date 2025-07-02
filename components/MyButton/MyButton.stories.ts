@@ -12,7 +12,7 @@ export default {
   },
 };
 
-const Template = (args: any) => ({
+const Template = (args: { label: string; type: string; disabled: boolean }) => ({
   components: { MyButton },
   setup() {
     return { args };

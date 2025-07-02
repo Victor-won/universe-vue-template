@@ -7,6 +7,9 @@ import { computed } from 'vue';
 
 import './button.css';
 
+// 增加组件名称，符合多词规范
+defineOptions({ name: 'StoryButton' });
+
 const props = withDefaults(
   defineProps<{
     /**

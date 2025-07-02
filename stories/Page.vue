@@ -59,6 +59,9 @@ import { ref } from 'vue';
 import MyHeader from './Header.vue';
 import './page.css';
 
+// 增加组件名称
+defineOptions({ name: 'StoryPage' });
+
 const user = ref<{ name: string } | null>(null);
 
 const onLogin = () => {

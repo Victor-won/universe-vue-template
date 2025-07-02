@@ -11,5 +11,8 @@ export default defineConfig({
       formats: ['es', 'cjs', 'umd'],
     },
     outDir: 'dist/vue3',
+    rollupOptions: {
+      external: ['vue', 'vue-demi'],
+    },
   },
 })

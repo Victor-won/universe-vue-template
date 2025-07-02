@@ -11,5 +11,8 @@ export default defineConfig({
       formats: ['es', 'cjs', 'umd'],
     },
     outDir: 'dist/vue2',
+    rollupOptions: {
+      external: ['vue', 'vue-demi', '@vue/composition-api'],
+    },
   },
 })
